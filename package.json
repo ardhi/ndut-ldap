@@ -1,0 +1,28 @@
+{
+  "name": "ndut-ldap",
+  "version": "0.5.0",
+  "description": "LDAP Client/Server for Ndut Framework",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardhi/ndut-ldap.git"
+  },
+  "keywords": [
+    "ndut",
+    "ldap",
+    "client",
+    "server",
+    "fastify"
+  ],
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ardhi/ndut-ldap/issues"
+  },
+  "homepage": "https://github.com/ardhi/ndut-ldap#readme",
+  "dependencies": {
+    "ldapjs": "^2.3.1"
+  }
+}

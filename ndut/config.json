@@ -1,0 +1,8 @@
+{
+  "mode": "server",
+  "server": {
+    "host": "localhost",
+    "port": 1389
+  },
+  "lowerCaseAttr": true
+}
