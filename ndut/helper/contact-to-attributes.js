@@ -12,6 +12,9 @@ module.exports = function (address, lowerCaseAttr) {
     attributes[k] = address[v]
   })
   attributes.cn = `${address.firstName} ${address.lastName}`
+  let oc = 'objectClass'
+  if (lowerCaseAttr) oc = oc.toLocaleLowerCase()
+  attributes[oc] = ['inetOrgPerson']
   _.forOwn(attributes, v => {
     if (isSet(v) && _.isString(v)) v = _.trim(v)
   })

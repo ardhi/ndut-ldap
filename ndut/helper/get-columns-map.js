@@ -13,9 +13,10 @@ module.exports = function (lowerCaseAttr) {
     st: 'state',
     co: 'country',
     telephoneNumber: 'phone',
-    mailrfc822Mailbox: 'email',
+    mail: 'email',
     wwwHomepage: 'website',
-    description: 'remark'
+    description: 'remark',
+    uid: 'id'
   }
   let result = _.cloneDeep(columns)
   if (lowerCaseAttr) {
