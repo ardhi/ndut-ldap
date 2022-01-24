@@ -1,13 +1,13 @@
 module.exports = function (lowerCaseAttr) {
   const { _ } = this.ndut.helper
   const columns = {
-    cn: 'firstName',
+    // cn: 'firstName',
     givenName: 'firstName',
     sn: 'lastName',
-    company: 'company',
+    title: 'title',
+    o: 'company',
     department: 'department',
-    street: 'address1',
-    streetAddress: 'address2',
+    street: 'address',
     l: 'city',
     postalCode: 'zipCode',
     st: 'state',
@@ -16,7 +16,10 @@ module.exports = function (lowerCaseAttr) {
     mail: 'email',
     wwwHomepage: 'website',
     description: 'remark',
-    uid: 'id'
+    uid: 'id',
+    mobile: 'mobilePhone',
+    homePhone: 'homePhone',
+    homePostalAddress: 'homeAddress'
   }
   let result = _.cloneDeep(columns)
   if (lowerCaseAttr) {

@@ -3,20 +3,17 @@ module.exports = function (address, lowerCaseAttr) {
   const { getColumnsMap } = this.ndutLdap.helper
   const { isSet } = aneka
   const columnsMap = getColumnsMap(lowerCaseAttr)
-  /*
-  let street = _.without([address.address1, address.address2], null, undefined, '')
-  street = _.isEmpty(street) ? null : street.join(', ')
-  */
   const attributes = {}
   _.forOwn(columnsMap, (v, k) => {
+    if (!isSet(address[v])) return
     attributes[k] = address[v]
   })
-  attributes.cn = `${address.firstName} ${address.lastName}`
+  // attributes.cn = `${address.firstName} ${address.lastName}`
   let oc = 'objectClass'
   if (lowerCaseAttr) oc = oc.toLocaleLowerCase()
-  attributes[oc] = ['inetOrgPerson']
+  attributes[oc] = ['top', 'inetOrgPerson']
   _.forOwn(attributes, v => {
-    if (isSet(v) && _.isString(v)) v = _.trim(v)
+    if (_.isString(v)) v = _.trim(v)
   })
   return attributes
 }

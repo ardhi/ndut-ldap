@@ -1,2 +1,2 @@
-["id", "username", "email", "firstName", "lastName", "address1",
-  "address2", "city", "zipCode", "state", "country", "phone", "company", "department"]
+["id", "username", "email", "firstName", "lastName", "title", "company", "department", "website",
+  "address", "city", "zipCode", "state", "country", "phone", "mobilePhone", "homePhone", "homeAddress"]

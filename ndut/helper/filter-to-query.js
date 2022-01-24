@@ -1,19 +1,19 @@
 
 
 module.exports = async function (filter, mapper) {
-  const { getColumnsMap } = this.ndutLdap.helper
+  const { _ } = this.ndut.helper
+  const { getColumnsMap, filterToQuery } = this.ndutLdap.helper
   if (!mapper) mapper = getColumnsMap(true) // search on ldap is ALWAYS case insensitive
   const q = {}
+  let attr
+  if (filter.attribute) attr = mapper[filter.attribute.toLowerCase()]
 
   if (filter.type === 'and' || filter.type === 'or') {
     q[filter.type] = []
     for (let i = 0; i < filter.filters.length; i++) {
-      const val = parse(filter.filters[i])
-      q[filter.type].push(val)
+      const val = await filterToQuery(filter.filters[i])
+      if (!_.isEmpty(val)) q[filter.type].push(val)
     }
-  }
-  if (['equal', 'approx'].includes(filter.type)) {
-    q[mapper[filter.attribute.toLowerCase()]] = filter.value
   }
   if (filter.type === 'present') {}
   if (filter.type === 'substring') {
@@ -25,16 +25,11 @@ module.exports = async function (filter, mapper) {
         items.push({ like: `%${filter.any[i]}%`})
       }
     }
-    q[mapper[filter.attribute.toLowerCase()]] = items.length > 1 ? { and: items } : items[0]
+    if (attr) q[attr] = items.length > 1 ? { and: items } : items[0]
   }
-  if (filter.type === 'ge') {
-    q[mapper[filter.attribute.toLowerCase()]] = { gte: filter.value }
-  }
-  if (filter.type === 'le') {
-    q[mapper[filter.attribute.toLowerCase()]] = { lte: filter.value }
-  }
-  if (filter.type === 'not') {
-    q[mapper[filter.attribute.toLowerCase()]] = { neq: filter.value }
-  }
+  if (attr && ['equal', 'approx'].includes(filter.type)) q[attr] = filter.value
+  if (attr && filter.type === 'ge') q[attr] = { gte: filter.value }
+  if (attr && filter.type === 'le') q[attr] = { lte: filter.value }
+  if (attr && filter.type === 'not') q[attr] = { neq: filter.value }
   return q
 }

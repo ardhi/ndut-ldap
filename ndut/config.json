@@ -1,8 +1,19 @@
 {
+  "singleWorker": true,
   "mode": "server",
   "server": {
     "host": "localhost",
     "port": 1389
   },
-  "lowerCaseAttr": true
+  "lowerCaseAttr": true,
+  "contacts": {
+    "disabled": false,
+    "editable": true,
+    "ou": "contacts"
+  },
+  "users": {
+    "disabled": false,
+    "ou": "users"
+  },
+  "dependency": ["ndut-site", "ndut-db", "ndut-auth"]
 }
